@@ -32,6 +32,32 @@
   --info-light: #d1ecf1;
 }
 
+body.theme-dark {
+  --primary: #cfd8ff;
+  --primary-light: #eef1ff;
+  --primary-dark: #9aa7ff;
+  --primary-text: #10131c;
+  --secondary: #ffb066;
+  --secondary-light: #ffd6a6;
+  --secondary-dark: #e58d32;
+  --secondary-text: #1a1206;
+  --background: #0f1115;
+  --surface: #1b1f28;
+  --text-primary: #f4f6fb;
+  --text-secondary: #c3c9d7;
+  --border: #2b3240;
+  --border-light: #232a36;
+  --border-focus: #3d4658;
+  --success: #63c174;
+  --success-light: #193021;
+  --warning: #ffb347;
+  --warning-light: #3b2a0b;
+  --error: #ff7a7a;
+  --error-light: #3a1717;
+  --info: #7ec8e3;
+  --info-light: #1b2c33;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -329,7 +355,7 @@ section h3 {
 
 button {
   background-color: var(--primary);
-  color: white;
+  color: var(--primary-text);
   border: none;
   padding: 6px 12px;
   font-size: 0.85rem;
@@ -347,8 +373,8 @@ button {
 
 .tooltip .tooltip-text {
   visibility: hidden;
-  background-color: rgba(33, 33, 33, 0.9);
-  color: #fff;
+  background-color: var(--text-primary);
+  color: var(--background);
   text-align: center;
   padding: 8px 12px;
   border-radius: 4px;
@@ -545,7 +571,7 @@ footer {
   height: 100%; /* Make button match input height */
   min-height: 32px; /* Ensure minimum clickable area */
   background: var(--primary);
-  color: white;
+  color: var(--primary-text);
   border: none;
   border-radius: 0 20px 20px 0;
   cursor: pointer;
@@ -602,7 +628,7 @@ footer {
 .day-filter.active,
 .time-filter.active {
   background-color: var(--primary);
-  color: white;
+  color: var(--primary-text);
   border-color: var(--primary-dark);
 }
 
@@ -610,7 +636,7 @@ footer {
 .day-filter:hover,
 .time-filter:hover {
   background-color: var(--primary-light);
-  color: white;
+  color: var(--primary-text);
 }
 
 .time-filters {
@@ -657,6 +683,9 @@ footer {
   position: absolute;
   top: 10px;
   right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 #user-status {
@@ -690,6 +719,22 @@ footer {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+body.theme-dark .icon-button {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.theme-dark .icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.theme-icon {
+  font-size: 1rem;
+}
+
+.theme-label {
+  font-size: 0.8rem;
+}
+
 .user-icon {
   font-size: 1rem;
 }
@@ -703,4 +748,12 @@ footer {
 
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+body.theme-dark #logout-button {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.theme-dark #logout-button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
