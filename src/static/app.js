@@ -476,6 +476,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderActivityCard(name, details) {
     const activityCard = document.createElement("div");
     activityCard.className = "activity-card";
+    const activityAnchor = `activity-${name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")}`;
+    activityCard.id = activityAnchor;
 
     // Calculate spots and capacity
     const totalSpots = details.max_participants;
@@ -498,10 +503,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
-    const shareUrl = `${window.location.origin}${window.location.pathname}`;
+    const shareUrl = `${window.location.origin}${window.location.pathname}${window.location.search}#${encodeURIComponent(
+      activityAnchor
+    )}`;
     const shareText = `Check out the ${name} activity at Mergington High School.`;
     const encodedShareUrl = encodeURIComponent(shareUrl);
     const encodedShareText = encodeURIComponent(shareText);
+    const safeName = name
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
 
     // Create activity tag
     const tagHtml = `
@@ -526,14 +539,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const shareButtons = `
       <div class="share-buttons">
         <span class="share-label">Share:</span>
-        <a class="share-button" href="https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}" target="_blank" rel="noopener noreferrer" aria-label="Share ${name} on Facebook">
-          📘
+        <a class="share-button" href="https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}" target="_blank" rel="noopener noreferrer" aria-label="Share ${safeName} on Facebook">
+          <span aria-hidden="true">📘</span>
         </a>
-        <a class="share-button" href="https://twitter.com/intent/tweet?text=${encodedShareText}&url=${encodedShareUrl}" target="_blank" rel="noopener noreferrer" aria-label="Share ${name} on X">
-          🐦
+        <a class="share-button" href="https://twitter.com/intent/tweet?text=${encodedShareText}&url=${encodedShareUrl}" target="_blank" rel="noopener noreferrer" aria-label="Share ${safeName} on X">
+          <span aria-hidden="true">🐦</span>
         </a>
-        <a class="share-button" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}" target="_blank" rel="noopener noreferrer" aria-label="Share ${name} on LinkedIn">
-          💼
+        <a class="share-button" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}" target="_blank" rel="noopener noreferrer" aria-label="Share ${safeName} on LinkedIn">
+          <span aria-hidden="true">💼</span>
         </a>
       </div>
     `;
