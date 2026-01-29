@@ -440,11 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const activityDifficulty = details.difficulty;
-      if (currentDifficulty === "all") {
-        if (activityDifficulty) {
-          return;
-        }
-      } else if (activityDifficulty !== currentDifficulty) {
+      if (currentDifficulty !== "all" && activityDifficulty !== currentDifficulty) {
         return;
       }
 
